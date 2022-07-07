@@ -159,6 +159,15 @@
         app:layout_constraintStart_toStartOf="@+id/verticalCenterGuideline"
         app:layout_constraintTop_toTopOf="@+id/confirmPasswordGuideline" />
 
+    <FrameLayout
+        android:id="@+id/confirmFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:soundEffectsEnabled="false"
+        android:layout_marginBottom="-40dp"
+        android:visibility="gone">
+    </FrameLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/modeGuideline"
         android:layout_width="wrap_content"

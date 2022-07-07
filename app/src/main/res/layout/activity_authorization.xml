@@ -41,6 +41,19 @@
         app:layout_constraintStart_toStartOf="@+id/verticalCenterGuideline"
         app:layout_constraintTop_toTopOf="@+id/passwordGuideline" />
 
+
+    <TextView
+        android:id="@+id/warningTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000"
+        android:maxLines="5"
+        app:layout_constraintBottom_toTopOf="@+id/emailEditText"
+        app:layout_constraintEnd_toStartOf="@+id/endGuideline"
+        app:layout_constraintStart_toStartOf="@+id/startGuideline"
+        app:layout_constraintTop_toTopOf="@+id/modeGuideline"
+        tools:text="Warnings" />
+
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="0dp"
