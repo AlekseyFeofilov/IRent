@@ -1,4 +1,4 @@
-package com.example.shift.authorization
+package com.example.shift.authorization.data
 
 data class User(
     var id: Long,

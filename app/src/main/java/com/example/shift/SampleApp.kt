@@ -7,7 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SampleApp : Application() {
 
     companion object{
-        val retrofit = Retrofit.Builder()
+        const val backendToggle = false
+
+        val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("") //todo: set URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
