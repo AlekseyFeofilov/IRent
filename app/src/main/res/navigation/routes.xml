@@ -21,8 +21,33 @@
         android:label="Feed"
         tools:layout="@layout/fragment_feed" />
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.shift.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.shift.usercards.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/ownFragment"
+        android:name="com.example.shift.usercards.OwnFragment"
+        android:label="Own"
+        tools:layout="@layout/fragment_own" />
+    <fragment
+        android:id="@+id/rentedFragment"
+        android:name="com.example.shift.usercards.RentedFragment"
+        android:label="Rented"
+        tools:layout="@layout/fragment_rented" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.shift.SettingsFragment"
+        android:label="Setting"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.example.shift.WalletFragment"
+        android:label="Wallet"
+        tools:layout="@layout/fragment_wallet" />
+    <fragment
+        android:id="@+id/rentHistoryFragment"
+        android:name="com.example.shift.RentHistoryFragment"
+        android:label="Rent history"
+        tools:layout="@layout/fragment_rent_history" />
 </navigation>

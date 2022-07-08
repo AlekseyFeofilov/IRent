@@ -2,18 +2,22 @@ package com.example.shift
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.MenuItem
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentManager
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.shift.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    NavigationView.OnNavigationItemSelectedListener,
+    NavigationBarView.OnItemSelectedListener
+{
     private lateinit var binding: ActivityMainBinding
     private lateinit var fragmentManager: FragmentManager
-    private var fragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,19 +27,27 @@ class MainActivity : AppCompatActivity() {
 
         val host = fragmentManager.findFragmentById(R.id.navFragment) as NavHostFragment? ?: return
         val navController = host.navController
-        //val navController = binding.navFragment.findNavController()
-
-        binding.navView.setupWithNavController(navController)
-
         val appBarConfiguration =
             AppBarConfiguration(navController.graph)
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        binding.navView.setupWithNavController(navController)
+        //binding.navView.setNavigationItemSelectedListener(this)
         binding.buttonNavView.setupWithNavController(navController)
+        //binding.buttonNavView.setOnItemSelectedListener(this)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+    }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.logOutButton -> {
+                //todo: Log out (hide item and reset user data)
+            }
 
-        /*binding.feedButton.setOnClickListener { navController.navigate(R.id.feedFragment) }
-        binding.chatButton.setOnClickListener { navController.navigate(R.id.chatFragment) }
-        binding.createCardButton.setOnClickListener { navController.navigate(R.id.createCardFragment) }
-        binding.profileButton.setOnClickListener { navController.navigate(R.id.profileFragment) }*/
+            R.id.profileFragment -> {
+                binding.drawerLayout.openDrawer(GravityCompat.START)
+            }
+        }
+
+        return true
     }
 }
