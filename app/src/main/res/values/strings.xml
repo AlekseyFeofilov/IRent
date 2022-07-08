@@ -13,4 +13,6 @@
     <string name="settings">settings</string>
     <string name="virtual_wallet">virtual wallet</string>
     <string name="rent_history">rent history</string>
+    <string name="feed">feed</string>
+    <string name="create_card">create card</string>
 </resources>
