@@ -1,4 +1,4 @@
-package com.example.shift
+package com.example.shift.card
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

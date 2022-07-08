@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.shift.ChatFragment"
+        android:name="com.example.shift.chat.ChatFragment"
         android:label="Chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/createCardFragment"
-        android:name="com.example.shift.CreateCardFragment"
+        android:name="com.example.shift.card.CreateCardFragment"
         android:label="Create new card"
         tools:layout="@layout/fragment_create_card" />
     <fragment
@@ -42,12 +42,12 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/walletFragment"
-        android:name="com.example.shift.WalletFragment"
+        android:name="com.example.shift.wallet.WalletFragment"
         android:label="Wallet"
         tools:layout="@layout/fragment_wallet" />
     <fragment
         android:id="@+id/rentHistoryFragment"
-        android:name="com.example.shift.RentHistoryFragment"
+        android:name="com.example.shift.usercards.RentHistoryFragment"
         android:label="Rent history"
         tools:layout="@layout/fragment_rent_history" />
 </navigation>

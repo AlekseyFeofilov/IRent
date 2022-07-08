@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:soundEffectsEnabled="false"
-    tools:context=".CreateCardFragment">
+    tools:context=".card.CreateCardFragment">
 
     <TextView
         android:id="@+id/toolsTextView"
