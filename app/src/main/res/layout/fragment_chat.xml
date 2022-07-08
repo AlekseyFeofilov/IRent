@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#66888888"
     android:soundEffectsEnabled="false"
     tools:context=".ChatFragment">
 
@@ -13,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chat Fragment"
-        android:textColor="#FF0000"
         android:textSize="32sp"
         tools:ignore="HardcodedText"/>
 

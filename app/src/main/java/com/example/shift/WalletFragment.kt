@@ -5,16 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.shift.databinding.FragmentProfileBinding
+import com.example.shift.databinding.FragmentWalletBinding
 
-class ProfileFragment  : Fragment() {
-    private lateinit var binding: FragmentProfileBinding
+class WalletFragment : Fragment() {
+    private lateinit var binding: FragmentWalletBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = FragmentWalletBinding.inflate(inflater, container, false)
 
         return binding.root
     }

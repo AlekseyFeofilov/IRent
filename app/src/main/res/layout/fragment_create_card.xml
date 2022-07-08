@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#66888888"
     android:soundEffectsEnabled="false"
     tools:context=".CreateCardFragment">
 
@@ -13,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create card Fragment"
-        android:textColor="#FF0000"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
