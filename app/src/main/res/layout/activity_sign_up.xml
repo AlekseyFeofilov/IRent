@@ -32,10 +32,11 @@
 
     <TextView
         android:id="@+id/warningTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="#FF0000"
         app:layout_constraintBottom_toTopOf="@+id/modeGuideline"
+        app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
         tools:text="Warning" />
 
