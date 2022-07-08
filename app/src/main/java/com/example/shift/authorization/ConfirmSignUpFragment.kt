@@ -8,9 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import com.example.shift.R
 import com.example.shift.databinding.FragmentConfirmSignUpBinding
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
@@ -28,20 +25,14 @@ class ConfirmSignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentConfirmSignUpBinding.inflate(layoutInflater)
-        val rootView = inflater.inflate(R.layout.fragment_confirm_sign_up, container, false)
+    ): View {
+        binding = FragmentConfirmSignUpBinding.inflate(inflater, container, false)
 
-        //todo: find the problem related with binding not working
-        val captchaButton = rootView.findViewById<Button>(R.id.captchaButton)
-        val confirmButton = rootView.findViewById<Button>(R.id.confirmButton)
-        val codeEditText = rootView.findViewById<EditText>(R.id.codeEditText)
-
-        rootView.findViewById<Button>(R.id.confirmButton).setOnClickListener{
-            (context as OnConfirmEmailListener).onConfirmEmail(codeEditText.text.toString())
+        binding.confirmButton.setOnClickListener{
+            (context as OnConfirmEmailListener).onConfirmEmail(binding.codeEditText.text.toString())
         }
 
-        captchaButton.setOnClickListener{
+        binding.captchaButton.setOnClickListener{
             val context = requireContext()
 
             SafetyNet.getClient(context).verifyWithRecaptcha("6LcG3tAgAAAAAPE3Lvvtfd--yv1GY-T_rqCJLAhw")
@@ -50,10 +41,10 @@ class ConfirmSignUpFragment : Fragment() {
                     // successful.
                     val userResponseToken = response.tokenResult
                     if (response.tokenResult?.isNotEmpty() == true) {
-                        confirmButton.isEnabled = true
-                        confirmButton.backgroundTintMode = null
-                        confirmButton.setTextColor(Color.BLACK)
-                        codeEditText.isEnabled = true
+                        binding.confirmButton.isEnabled = true
+                        binding.confirmButton.backgroundTintMode = null
+                        binding.confirmButton.setTextColor(Color.BLACK)
+                        binding.codeEditText.isEnabled = true
                     }
                 })
                 .addOnFailureListener(requireActivity()/*context as Executor*/, OnFailureListener { e ->
@@ -69,6 +60,6 @@ class ConfirmSignUpFragment : Fragment() {
                 })
         }
 
-        return rootView
+        return binding.root
     }
 }
