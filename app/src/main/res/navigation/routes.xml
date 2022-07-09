@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/routes"
+    app:startDestination="@id/feedFragment">
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.shift.chat.ChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/createCardFragment"
+        android:name="com.example.shift.card.CreateCardFragment"
+        android:label="Create new card"
+        tools:layout="@layout/fragment_create_card" />
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.example.shift.FeedFragment"
+        android:label="Feed"
+        tools:layout="@layout/fragment_feed" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.shift.usercards.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/ownFragment"
+        android:name="com.example.shift.usercards.OwnFragment"
+        android:label="Own"
+        tools:layout="@layout/fragment_own" />
+    <fragment
+        android:id="@+id/rentedFragment"
+        android:name="com.example.shift.usercards.RentedFragment"
+        android:label="Rented"
+        tools:layout="@layout/fragment_rented" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.shift.SettingsFragment"
+        android:label="Setting"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.example.shift.wallet.WalletFragment"
+        android:label="Wallet"
+        tools:layout="@layout/fragment_wallet" />
+    <fragment
+        android:id="@+id/rentHistoryFragment"
+        android:name="com.example.shift.usercards.RentHistoryFragment"
+        android:label="Rent history"
+        tools:layout="@layout/fragment_rent_history" />
+</navigation>
