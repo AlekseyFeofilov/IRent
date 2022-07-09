@@ -2,15 +2,16 @@ package com.example.shift
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.example.shift.authorization.AuthorizationActivity
 import com.example.shift.databinding.ActivityMainBinding
-import com.example.shift.utils.setupWithNavControllerAndDrawerLayout
-import com.example.shift.utils.setupWithNavControllerLogoutAndButtonNavigationView
+import com.example.shift.utils.setupWithNavControllerAndOnSelectedListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnMenuItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var fragmentManager: FragmentManager
 
@@ -25,8 +26,35 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration =
             AppBarConfiguration(navController.graph)
 
-        binding.navView.setupWithNavControllerLogoutAndButtonNavigationView(binding.buttonNavView, navController, R.id.logOutButton)
-        binding.buttonNavView.setupWithNavControllerAndDrawerLayout(navController, binding.drawerLayout, R.id.sidebar)
+        binding.navView.setupWithNavControllerAndOnSelectedListener(navController, this)
+        binding.buttonNavView.setupWithNavControllerAndOnSelectedListener(navController, this)
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+    }
+
+    private fun setGroupCheckable(isBacklight: Boolean) {
+        binding.buttonNavView.menu.setGroupCheckable(0, isBacklight, true)
+    }
+
+    override fun onMenuItemSelectedListener(item: MenuItem) {
+        binding.drawerLayout.close()
+
+        setGroupCheckable(
+            when (item.itemId) {
+                R.id.feedFragment -> true
+                R.id.createCardFragment -> true
+                R.id.chatFragment -> true
+                R.id.sidebar -> {
+                    binding.drawerLayout.open()
+                    true
+                }
+                R.id.logOutButton -> {
+                    val sharedPreferences = getSharedPreferences(AuthorizationActivity.APP_PREFERENCES, MODE_PRIVATE)
+                    sharedPreferences.edit().remove(AuthorizationActivity.APP_PREFERENCES_USER).apply()
+                    AuthorizationActivity.user = null
+                    false
+                }
+                else -> false
+            }
+        )
     }
 }
