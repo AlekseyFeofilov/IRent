@@ -16,4 +16,16 @@
     <string name="feed">feed</string>
     <string name="create_card">create card</string>
     <string name="menu_icon">menuIcon</string>
+    <string name="sign_up">Sign up</string>
+    <string name="log_in">Log in</string>
+    <string name="password">Password</string>
+    <string name="submit">Submit</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="phone_number">Phone number</string>
+    <string name="email">Email</string>
+    <string name="surname">Surname</string>
+    <string name="name">Name</string>
+    <string name="i_m_not_a_robot">I\'m not a robot</string>
+    <string name="confirm_email">Confirm email</string>
+    <string name="code">code</string>
 </resources>
