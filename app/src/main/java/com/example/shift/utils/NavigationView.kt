@@ -8,31 +8,25 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.ui.NavigationUI
+import com.example.shift.OnMenuItemSelectedListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import java.lang.ref.WeakReference
 
-fun NavigationView.setupWithNavControllerLogoutAndButtonNavigationView(
-    buttonNavigationView: NavigationBarView,
+fun NavigationView.setupWithNavControllerAndOnSelectedListener(
     navController: NavController,
-    logoutItemId: Int
-    ){
-    setupWithNavController(buttonNavigationView, this, navController, logoutItemId)
+    onMenuItemSelectedListener: OnMenuItemSelectedListener
+) {
+    setupWithNavController(this, navController, onMenuItemSelectedListener)
 }
 
 private fun setupWithNavController(
-    buttonNavigationView: NavigationBarView,
     navigationView: NavigationView,
     navController: NavController,
-    logoutItemId: Int
+    onMenuItemSelectedListener: OnMenuItemSelectedListener
 ) {
     navigationView.setNavigationItemSelectedListener { item ->
-        buttonNavigationView.menu.setGroupCheckable(0, false, true)
-
-        if(item.itemId == logoutItemId){
-            //todo: Log out (hide item and reset user data)
-        }
+        onMenuItemSelectedListener.onMenuItemSelectedListener(item)
 
         val handled = NavigationUI.onNavDestinationSelected(item, navController)
         if (handled) {

@@ -3,36 +3,28 @@ package com.example.shift.utils
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.core.view.forEach
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.ui.NavigationUI
+import com.example.shift.OnMenuItemSelectedListener
 import com.google.android.material.navigation.NavigationBarView
 import java.lang.ref.WeakReference
 
-fun NavigationBarView.setupWithNavControllerAndDrawerLayout(
+fun NavigationBarView.setupWithNavControllerAndOnSelectedListener(
     navController: NavController,
-    drawerLayout: DrawerLayout,
-    openSidebarItemId: Int
+    onMenuItemSelectedListener: OnMenuItemSelectedListener
 ) {
-    setupWithNavController(this, navController, drawerLayout, openSidebarItemId)
+    setupWithNavController(this, navController, onMenuItemSelectedListener)
 }
 
 private fun setupWithNavController(
     navigationBarView: NavigationBarView,
     navController: NavController,
-    drawerLayout: DrawerLayout,
-    openSidebarItemId: Int
+    onMenuItemSelectedListener: OnMenuItemSelectedListener
 ) {
     navigationBarView.setOnItemSelectedListener { item ->
-        navigationBarView.menu.setGroupCheckable(0, true, true)
-
-        if (item.itemId == openSidebarItemId) {
-            drawerLayout.open()
-        } else {
-            drawerLayout.close()
-        }
+        onMenuItemSelectedListener.onMenuItemSelectedListener(item)
 
         NavigationUI.onNavDestinationSelected(
             item,
