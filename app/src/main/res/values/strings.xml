@@ -15,4 +15,5 @@
     <string name="rent_history">rent history</string>
     <string name="feed">feed</string>
     <string name="create_card">create card</string>
+    <string name="menu_icon">menuIcon</string>
 </resources>
