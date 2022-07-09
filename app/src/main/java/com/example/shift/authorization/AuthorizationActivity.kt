@@ -16,13 +16,19 @@ import retrofit2.Response
 class AuthorizationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthorizationBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var gson: Gson
 
     companion object {
         var user: User? = null
 
         const val APP_PREFERENCES_USER = "User"
         const val APP_PREFERENCES = "Settings"
+
+        fun saveUser(sharedPreferences: SharedPreferences){
+            sharedPreferences
+                .edit()
+                .putString(APP_PREFERENCES_USER, Gson().toJson(user))
+                .apply()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +37,6 @@ class AuthorizationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
-        gson = Gson()
 
         binding.submitButton.setOnClickListener(submit)
         binding.signUpButton.setOnClickListener(toSignUpActivity)
@@ -45,14 +50,7 @@ class AuthorizationActivity : AppCompatActivity() {
 
     private val submit = View.OnClickListener {
         logIn(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
-        saveUser()
-    }
-
-    private fun saveUser() {
-        sharedPreferences
-            .edit()
-            .putString(APP_PREFERENCES_USER, gson.toJson(user))
-            .apply()
+        saveUser(sharedPreferences)
     }
 
     private fun showWarning(warning: String){

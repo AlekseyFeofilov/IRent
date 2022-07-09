@@ -29,6 +29,7 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".authorization.AuthorizationActivity"/>
+        <activity android:name=".authorization.SignUpActivity"/>
     </application>
 
 </manifest>

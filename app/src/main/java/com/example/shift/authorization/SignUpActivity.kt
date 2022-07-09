@@ -177,7 +177,7 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
     }
 
     override fun onConfirmEmail(code: String) {
-        if(code.isEmpty()){
+        if (code.isEmpty()) {
             showWarning("Enter code")
             return
         }
@@ -202,11 +202,14 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
 
                 })
         } else {
+            AuthorizationActivity.user =
+                User(0L, "Mr No Name", "No surname", "No email", "No phone number")
+            AuthorizationActivity.saveUser(getSharedPreferences(AuthorizationActivity.APP_PREFERENCES, MODE_PRIVATE))
             goToMainActivity()
         }
     }
 
-    private fun goToMainActivity(){
+    private fun goToMainActivity() {
         val intent = Intent(this@SignUpActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
