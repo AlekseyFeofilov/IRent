@@ -14,7 +14,7 @@ import com.example.shift.databinding.ActivityMainBinding
 import com.example.shift.utils.setupWithNavControllerAndOnSelectedListener
 import com.google.gson.Gson
 
-class MainActivity : AppCompatActivity(), OnMenuItemSelectedListener {
+class MainActivity : AppCompatActivity(), OnMenuItemSelectedListener, OnAuthorized {
     private lateinit var binding: ActivityMainBinding
     private lateinit var fragmentManager: FragmentManager
 
@@ -91,5 +91,10 @@ class MainActivity : AppCompatActivity(), OnMenuItemSelectedListener {
                 else -> false
             }
         )
+    }
+
+    override fun onAuthorized() {
+        binding.buttonNavView.menu.performIdentifierAction(R.id.feedFragment, 0)
+        tuneNavigation()
     }
 }
