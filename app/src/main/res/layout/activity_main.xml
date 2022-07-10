@@ -15,23 +15,22 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.93" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/navFragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/navigationGuideline"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:navGraph="@navigation/routes" />
-
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fitsSystemWindows="true"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toTopOf="@id/navigationGuideline">
+        app:layout_constraintBottom_toTopOf="@id/navigationGuideline"
+        tools:openDrawer="start">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/navFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/routes" />
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navView"
