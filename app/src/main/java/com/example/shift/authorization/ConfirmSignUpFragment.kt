@@ -36,7 +36,7 @@ class ConfirmSignUpFragment : Fragment() {
         binding.captchaButton.setOnClickListener{
             val context = requireContext()
 
-            if(SampleApp.captchaToggle) {
+            if (SampleApp.captchaToggle) {
                 SafetyNet.getClient(context)
                     .verifyWithRecaptcha("6LcG3tAgAAAAAPE3Lvvtfd--yv1GY-T_rqCJLAhw")
                     .addOnSuccessListener(
