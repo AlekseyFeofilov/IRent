@@ -1,43 +1,36 @@
 package com.example.shift.authorization
 
-import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import com.example.shift.MainActivity
+import com.example.shift.OnAuthorized
 import com.example.shift.R
 import com.example.shift.SampleApp
 import com.example.shift.authorization.data.Security
 import com.example.shift.authorization.data.User
-import com.example.shift.databinding.ActivitySignUpBinding
+import com.example.shift.databinding.FragmentSignUpBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmailListener {
-    private lateinit var binding: ActivitySignUpBinding
-    private lateinit var fragmentManager: FragmentManager
+class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener {
+    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var fm: FragmentManager
     private var id: Long? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fragmentManager = supportFragmentManager
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        fm = requireActivity().supportFragmentManager
+        binding = FragmentSignUpBinding.inflate(inflater, container, false)
         binding.submitButton.setOnClickListener(submit)
-        binding.logInButton.setOnClickListener(toLogInActivity)
 
-        //it's for click interception from EditText in a background
-        binding.confirmFrameLayout.setOnClickListener {}
-    }
-
-    private val toLogInActivity = View.OnClickListener {
-        val intent = Intent(this, AuthorizationActivity::class.java)
-        startActivity(intent)
-        finish()
+        return binding.root
     }
 
     private fun showWarning(warning: String) {
@@ -156,23 +149,24 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
         val password = binding.passwordEditText.text.toString()
         val confirmPassword = binding.confirmPasswordEditText.text.toString()
 
-        if (
-            !checkCompletion(name, surname, email, phoneNumber, password, confirmPassword) ||
-            !checkPasswords(password, confirmPassword) ||
-            !checkEmail(email)
-        ) {
-            return@OnClickListener
+        if(SampleApp.authorizationToggle) {
+            if (
+                !checkCompletion(name, surname, email, phoneNumber, password, confirmPassword) ||
+                !checkPasswords(password, confirmPassword) ||
+                !checkEmail(email)
+            ) {
+                return@OnClickListener
+            }
         }
 
         id = createUser(name, surname, email, phoneNumber, password) ?: return@OnClickListener
 
         binding.confirmFrameLayout.visibility = View.VISIBLE
-        binding.logInButton.isEnabled = false
         binding.submitButton.isEnabled = false
 
-        fragmentManager
+        fm
             .beginTransaction()
-            .add(R.id.confirmFrameLayout, ConfirmSignUpFragment())
+            .add(R.id.confirmFrameLayout, ConfirmSignUpFragment(this))
             .commit()
     }
 
@@ -193,7 +187,7 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
                             return
                         }
 
-                        AuthorizationActivity.user = response.body()
+                        AuthorizationFragment.user = response.body()
                     }
 
                     override fun onFailure(call: Call<User>, t: Throwable) {
@@ -202,16 +196,14 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
 
                 })
         } else {
-            AuthorizationActivity.user =
+            AuthorizationFragment.user =
                 User(0L, "Mr No Name", "No surname", "No email", "No phone number")
-            AuthorizationActivity.saveUser(getSharedPreferences(AuthorizationActivity.APP_PREFERENCES, MODE_PRIVATE))
-            goToMainActivity()
-        }
-    }
+            AuthorizationFragment.saveUser(requireActivity().getSharedPreferences(AuthorizationFragment.APP_PREFERENCES,
+                AppCompatActivity.MODE_PRIVATE
+            ))
 
-    private fun goToMainActivity() {
-        val intent = Intent(this@SignUpActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+            (requireActivity() as OnAuthorized).onAuthorized()
+            //menu.performIdentifierAction(R.id.action_restart, 0);
+        }
     }
 }
