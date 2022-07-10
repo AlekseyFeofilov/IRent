@@ -16,10 +16,10 @@ import com.google.android.gms.safetynet.SafetyNet
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 
-class ConfirmSignUpFragment : Fragment() {
+class ConfirmSignUpFragment(private val signUpFragment: SignUpFragment) : Fragment() {
     private lateinit var binding: FragmentConfirmSignUpBinding
 
-    interface OnConfirmEmailListener{
+    interface OnConfirmEmailListener {
         fun onConfirmEmail(code: String)
     }
 
@@ -28,12 +28,11 @@ class ConfirmSignUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentConfirmSignUpBinding.inflate(inflater, container, false)
-
-        binding.confirmButton.setOnClickListener{
-            (context as OnConfirmEmailListener).onConfirmEmail(binding.codeEditText.text.toString())
+        binding.confirmButton.setOnClickListener {
+            signUpFragment.onConfirmEmail(binding.codeEditText.text.toString())
         }
 
-        binding.captchaButton.setOnClickListener{
+        binding.captchaButton.setOnClickListener {
             val context = requireContext()
 
             if (SampleApp.captchaToggle) {
