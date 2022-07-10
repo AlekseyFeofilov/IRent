@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.example.shift.authorization.AuthorizationActivity
+import com.example.shift.authorization.AuthorizationFragment
 import com.example.shift.authorization.data.User
 import com.example.shift.databinding.ActivityMainBinding
 import com.example.shift.utils.setupWithNavControllerAndOnSelectedListener
@@ -33,25 +33,33 @@ class MainActivity : AppCompatActivity(), OnMenuItemSelectedListener {
         binding.buttonNavView.setupWithNavControllerAndOnSelectedListener(navController, this)
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
-        AuthorizationActivity.user = Gson().fromJson(
-            getSharedPreferences(AuthorizationActivity.APP_PREFERENCES, MODE_PRIVATE).
-            getString(AuthorizationActivity.
-            APP_PREFERENCES_USER, ""),
-            User::class.java)
+        AuthorizationFragment.user = Gson().fromJson(
+            getSharedPreferences(AuthorizationFragment.APP_PREFERENCES, MODE_PRIVATE).getString(
+                AuthorizationFragment.APP_PREFERENCES_USER, ""
+            ),
+            User::class.java
+        )
 
-        tuneHeader()
+        tuneNavigation()
     }
 
-    private fun tuneHeader() {
+    private fun tuneNavigation() {
+        binding.navView.menu.clear()
+        binding.buttonNavView.menu.clear()
+
         val header = binding.navView.getHeaderView(0)
 
-        if (AuthorizationActivity.user == null) {
+        if (AuthorizationFragment.user == null) {
             header.findViewById<TextView>(R.id.titleTextView).text = "You're not authorized"
+            binding.navView.inflateMenu(R.menu.drawer_menu_not_authorized)
+            binding.buttonNavView.inflateMenu(R.menu.button_nav_menu_not_authorized)
             return
         }
 
+        binding.navView.inflateMenu(R.menu.drawer_menu_authorized)
+        binding.buttonNavView.inflateMenu(R.menu.button_nav_menu_authorized)
         header.findViewById<TextView>(R.id.titleTextView).text =
-            "${AuthorizationActivity.user!!.name} ${AuthorizationActivity.user!!.surname}"
+            "${AuthorizationFragment.user!!.name} ${AuthorizationFragment.user!!.surname}"
     }
 
     private fun setGroupCheckable(isBacklight: Boolean) {
@@ -68,15 +76,16 @@ class MainActivity : AppCompatActivity(), OnMenuItemSelectedListener {
                 R.id.chatFragment -> true
                 R.id.sidebar -> {
                     binding.drawerLayout.open()
-                    true
+                    false
                 }
                 R.id.logOutButton -> {
                     val sharedPreferences =
-                        getSharedPreferences(AuthorizationActivity.APP_PREFERENCES, MODE_PRIVATE)
-                    sharedPreferences.edit().remove(AuthorizationActivity.APP_PREFERENCES_USER)
+                        getSharedPreferences(AuthorizationFragment.APP_PREFERENCES, MODE_PRIVATE)
+                    sharedPreferences.edit().remove(AuthorizationFragment.APP_PREFERENCES_USER)
                         .apply()
-                    AuthorizationActivity.user = null
-                    tuneHeader()
+
+                    AuthorizationFragment.user = null
+                    tuneNavigation()
                     false
                 }
                 else -> false

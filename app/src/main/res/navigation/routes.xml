@@ -50,4 +50,14 @@
         android:name="com.example.shift.usercards.RentHistoryFragment"
         android:label="Rent history"
         tools:layout="@layout/fragment_rent_history" />
+    <fragment
+        android:id="@+id/authorizationFragment"
+        android:name="com.example.shift.authorization.AuthorizationFragment"
+        android:label="Log in"
+        tools:layout="@layout/fragment_authorization" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.shift.authorization.SignUpFragment"
+        android:label="Sign up"
+        tools:layout="@layout/fragment_sign_up" />
 </navigation>
