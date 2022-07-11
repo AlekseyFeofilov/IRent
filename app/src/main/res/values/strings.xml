@@ -28,4 +28,6 @@
     <string name="i_m_not_a_robot">I\'m not a robot</string>
     <string name="confirm_email">Confirm email</string>
     <string name="code">code</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="icon">icon</string>
 </resources>

@@ -4,6 +4,7 @@
     package="com.example.shift">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +29,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".authorization.AuthorizationActivity"/>
     </application>
 
 </manifest>

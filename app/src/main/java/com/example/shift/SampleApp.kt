@@ -8,6 +8,8 @@ class SampleApp : Application() {
 
     companion object{
         const val backendToggle = false
+        const val captchaToggle = true
+        const val authorizationToggle = false
 
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("") //todo: set URL

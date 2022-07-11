@@ -1,43 +1,47 @@
 package com.example.shift.authorization
 
-import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.shift.MainActivity
+import com.example.shift.OnAuthorized
 import com.example.shift.R
 import com.example.shift.SampleApp
+import com.example.shift.authorization.AuthorizationFragment.Companion.user
 import com.example.shift.authorization.data.Security
 import com.example.shift.authorization.data.User
-import com.example.shift.databinding.ActivitySignUpBinding
+import com.example.shift.databinding.FragmentSignUpBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmailListener {
-    private lateinit var binding: ActivitySignUpBinding
-    private lateinit var fragmentManager: FragmentManager
+class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener {
+    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var fm: FragmentManager
     private var id: Long? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fragmentManager = supportFragmentManager
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        fm = requireActivity().supportFragmentManager
+        binding = FragmentSignUpBinding.inflate(inflater, container, false)
         binding.submitButton.setOnClickListener(submit)
-        binding.logInButton.setOnClickListener(toLogInActivity)
 
-        //it's for click interception from EditText in a background
-        binding.confirmFrameLayout.setOnClickListener {}
+        binding.addPhotoButton.setOnClickListener{
+            getContent.launch("image/*")
+        }
+
+        return binding.root
     }
 
-    private val toLogInActivity = View.OnClickListener {
-        val intent = Intent(this, AuthorizationActivity::class.java)
-        startActivity(intent)
-        finish()
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        binding.iconImageView.setImageURI(uri)
     }
 
     private fun showWarning(warning: String) {
@@ -111,6 +115,7 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
 
     private fun createUser(
         name: String,
+        uri: String,
         surname: String,
         email: String,
         phoneNumber: String,
@@ -123,7 +128,7 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
                 .create(AuthorizationApi::class.java)
                 .createUser(
                     Security(0L, email, password),
-                    User(0L, name, surname, email, phoneNumber)
+                    User(0L, /*uri,*/ name, surname, email, phoneNumber)
                 )
                 .enqueue(object : Callback<Long> {
                     override fun onResponse(call: Call<Long>, response: Response<Long>) {
@@ -156,28 +161,35 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
         val password = binding.passwordEditText.text.toString()
         val confirmPassword = binding.confirmPasswordEditText.text.toString()
 
-        if (
-            !checkCompletion(name, surname, email, phoneNumber, password, confirmPassword) ||
-            !checkPasswords(password, confirmPassword) ||
-            !checkEmail(email)
-        ) {
-            return@OnClickListener
+        if(SampleApp.authorizationToggle) {
+            if (
+                !checkCompletion(name, surname, email, phoneNumber, password, confirmPassword) ||
+                !checkPasswords(password, confirmPassword) ||
+                !checkEmail(email)
+            ) {
+                return@OnClickListener
+            }
         }
 
-        id = createUser(name, surname, email, phoneNumber, password) ?: return@OnClickListener
+        val uri = Uri.parse("android.resource://com.example.shift/" + binding.iconImageView.drawable);
+
+        if(!SampleApp.backendToggle){
+            user = User(0, /*uri.toString(),*/ name, surname, email, phoneNumber)
+        }
+
+        id = createUser(name, uri.toString(), surname, email, phoneNumber, password) ?: return@OnClickListener
 
         binding.confirmFrameLayout.visibility = View.VISIBLE
-        binding.logInButton.isEnabled = false
         binding.submitButton.isEnabled = false
 
-        fragmentManager
+        fm
             .beginTransaction()
-            .add(R.id.confirmFrameLayout, ConfirmSignUpFragment())
+            .add(R.id.confirmFrameLayout, ConfirmSignUpFragment(this))
             .commit()
     }
 
     override fun onConfirmEmail(code: String) {
-        if(code.isEmpty()){
+        if (code.isEmpty()) {
             showWarning("Enter code")
             return
         }
@@ -193,7 +205,7 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
                             return
                         }
 
-                        AuthorizationActivity.user = response.body()
+                        user = response.body()
                     }
 
                     override fun onFailure(call: Call<User>, t: Throwable) {
@@ -202,13 +214,11 @@ class SignUpActivity : AppCompatActivity(), ConfirmSignUpFragment.OnConfirmEmail
 
                 })
         } else {
-            goToMainActivity()
-        }
-    }
+            AuthorizationFragment.saveUser(requireActivity().getSharedPreferences(AuthorizationFragment.APP_PREFERENCES,
+                AppCompatActivity.MODE_PRIVATE
+            ))
 
-    private fun goToMainActivity(){
-        val intent = Intent(this@SignUpActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+            (requireActivity() as OnAuthorized).onAuthorized()
+        }
     }
 }

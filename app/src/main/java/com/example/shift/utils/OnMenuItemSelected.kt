@@ -1,4 +1,4 @@
-package com.example.shift
+package com.example.shift.utils
 
 import android.view.MenuItem
 
