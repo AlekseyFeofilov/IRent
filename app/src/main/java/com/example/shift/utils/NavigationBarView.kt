@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.ui.NavigationUI
-import com.example.shift.OnMenuItemSelectedListener
 import com.google.android.material.navigation.NavigationBarView
 import java.lang.ref.WeakReference
 

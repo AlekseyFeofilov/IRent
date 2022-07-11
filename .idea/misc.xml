@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/drawable/round_button.xml" value="0.176" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/drawable/splash_screen.xml" value="0.1025" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/activity_authorization.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/activity_main.xml" value="0.16799999999999998" />
@@ -19,7 +20,7 @@
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_rent_history.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_rented.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_settings.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_sign_up.xml" value="0.2" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_wallet.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/nav_header_main.xml" value="0.253125" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/menu/button_nav_menu.xml" value="0.25416666666666665" />

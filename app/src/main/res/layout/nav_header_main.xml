@@ -12,10 +12,12 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="30dp"
         android:contentDescription="@string/menu_icon"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/ic_user"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/titleTextView"
