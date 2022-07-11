@@ -3,7 +3,9 @@ package com.example.shift
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.shift.authorization.AuthorizationFragment
 import com.example.shift.authorization.data.User
 import com.example.shift.databinding.ActivityMainBinding
+import com.example.shift.utils.OnMenuItemSelectedListener
 import com.example.shift.utils.setupWithNavControllerAndOnSelectedListener
 import com.google.gson.Gson
 
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity(), OnMenuItemSelectedListener, OnAuthoriz
         binding.buttonNavView.inflateMenu(R.menu.button_nav_menu_authorized)
         header.findViewById<TextView>(R.id.titleTextView).text =
             "${AuthorizationFragment.user!!.name} ${AuthorizationFragment.user!!.surname}"
+        //header.findViewById<ImageView>(R.id.iconImageView).setImageURI(AuthorizationFragment.user!!.icon.toUri())
     }
 
     private fun setGroupCheckable(isBacklight: Boolean) {

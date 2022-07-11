@@ -1,15 +1,18 @@
 package com.example.shift.authorization
 
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.shift.OnAuthorized
 import com.example.shift.R
 import com.example.shift.SampleApp
+import com.example.shift.authorization.AuthorizationFragment.Companion.user
 import com.example.shift.authorization.data.Security
 import com.example.shift.authorization.data.User
 import com.example.shift.databinding.FragmentSignUpBinding
@@ -30,7 +33,15 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
         binding.submitButton.setOnClickListener(submit)
 
+        binding.addPhotoButton.setOnClickListener{
+            getContent.launch("image/*")
+        }
+
         return binding.root
+    }
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        binding.iconImageView.setImageURI(uri)
     }
 
     private fun showWarning(warning: String) {
@@ -104,6 +115,7 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
 
     private fun createUser(
         name: String,
+        uri: String,
         surname: String,
         email: String,
         phoneNumber: String,
@@ -116,7 +128,7 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
                 .create(AuthorizationApi::class.java)
                 .createUser(
                     Security(0L, email, password),
-                    User(0L, name, surname, email, phoneNumber)
+                    User(0L, /*uri,*/ name, surname, email, phoneNumber)
                 )
                 .enqueue(object : Callback<Long> {
                     override fun onResponse(call: Call<Long>, response: Response<Long>) {
@@ -159,7 +171,13 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
             }
         }
 
-        id = createUser(name, surname, email, phoneNumber, password) ?: return@OnClickListener
+        val uri = Uri.parse("android.resource://com.example.shift/" + binding.iconImageView.drawable);
+
+        if(!SampleApp.backendToggle){
+            user = User(0, /*uri.toString(),*/ name, surname, email, phoneNumber)
+        }
+
+        id = createUser(name, uri.toString(), surname, email, phoneNumber, password) ?: return@OnClickListener
 
         binding.confirmFrameLayout.visibility = View.VISIBLE
         binding.submitButton.isEnabled = false
@@ -187,7 +205,7 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
                             return
                         }
 
-                        AuthorizationFragment.user = response.body()
+                        user = response.body()
                     }
 
                     override fun onFailure(call: Call<User>, t: Throwable) {
@@ -196,14 +214,11 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
 
                 })
         } else {
-            AuthorizationFragment.user =
-                User(0L, "Mr No Name", "No surname", "No email", "No phone number")
             AuthorizationFragment.saveUser(requireActivity().getSharedPreferences(AuthorizationFragment.APP_PREFERENCES,
                 AppCompatActivity.MODE_PRIVATE
             ))
 
             (requireActivity() as OnAuthorized).onAuthorized()
-            //menu.performIdentifierAction(R.id.action_restart, 0);
         }
     }
 }

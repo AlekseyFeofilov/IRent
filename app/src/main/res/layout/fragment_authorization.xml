@@ -15,7 +15,7 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/verticalCenterGuideline"
-        app:layout_constraintTop_toTopOf="@+id/passwordGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/passwordEndGuideline" />
 
 
     <TextView
@@ -47,7 +47,7 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/passwordGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/passwordEndGuideline"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline" />
 
@@ -78,7 +78,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/passwordGuideline"
+        android:id="@+id/passwordEndGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

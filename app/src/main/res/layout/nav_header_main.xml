@@ -17,7 +17,7 @@
         android:layout_marginStart="30dp"
         android:contentDescription="@string/menu_icon"
         app:srcCompat="@drawable/ic_user"
-        android:scaleType="fitXY"/>
+        android:scaleType="centerInside"/>
 
     <TextView
         android:id="@+id/titleTextView"
