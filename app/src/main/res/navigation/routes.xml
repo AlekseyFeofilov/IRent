@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_create_card" />
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.example.shift.FeedFragment"
+        android:name="com.example.shift.feed.FeedFragment"
         android:label="Feed"
         tools:layout="@layout/fragment_feed" />
     <fragment
