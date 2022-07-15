@@ -38,7 +38,7 @@ class FeedFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                feedViewModel.photoItems.collect { items ->
+                feedViewModel.feedItems.collect { items ->
                     binding.cardGrid.adapter = FeedListAdapter(items) { id ->
                         findNavController().navigate(FeedFragmentDirections.showCardDetail(id))
                     }

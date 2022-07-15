@@ -14,16 +14,16 @@ private const val TAG = "FeedViewModel"
 class FeedViewModel: ViewModel() {
     private val feedRepository = FeedRepository()
 
-    private val _photoItems: MutableStateFlow<List<FeedItem>> = MutableStateFlow(emptyList())
-    val photoItems: StateFlow<List<FeedItem>>
-    get() = _photoItems.asStateFlow()
+    private val _feedItems: MutableStateFlow<List<FeedItem>> = MutableStateFlow(emptyList())
+    val feedItems: StateFlow<List<FeedItem>>
+    get() = _feedItems.asStateFlow()
 
     init {
         viewModelScope.launch {
             try {
                 val items = feedRepository.fetchFeeds()
                 Log.d(TAG, "Items received: $items")
-                _photoItems.value = items
+                _feedItems.value = items
             } catch (ex: Exception) {
                 Log.e(TAG, "Failed to fetch gallery items", ex)
             }

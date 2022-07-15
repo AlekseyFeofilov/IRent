@@ -1,4 +1,4 @@
-package com.example.shift.feed
+package com.example.shift.card
 
 import com.example.shift.api.FeedItem
 import com.example.shift.api.IrentApi
@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 
-class FeedRepository {
+class CardRepository {
     private val irentApi: IrentApi
 
     init {
@@ -17,5 +17,5 @@ class FeedRepository {
         irentApi = retrofit.create()
     }
 
-    suspend fun fetchFeeds(): List<FeedItem> = irentApi.fetchFeeds()
+    suspend fun fetchCard(id: Long): FeedItem = irentApi.fetchCard(id)
 }
