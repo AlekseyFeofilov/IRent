@@ -45,10 +45,12 @@ class ConfirmSignUpFragment(private val signUpFragment: SignUpFragment) : Fragme
                             // successful.
                             val userResponseToken = response.tokenResult
                             if (response.tokenResult?.isNotEmpty() == true) {
-                                binding.confirmButton.isEnabled = true
-                                binding.confirmButton.backgroundTintMode = null
-                                binding.confirmButton.setTextColor(Color.BLACK)
-                                binding.codeEditText.isEnabled = true
+                                binding.apply {
+                                    confirmButton.isEnabled = true
+                                    confirmButton.backgroundTintMode = null
+                                    confirmButton.setTextColor(Color.BLACK)
+                                    codeEditText.isEnabled = true
+                                }
                             }
                         })
                     .addOnFailureListener(
@@ -68,10 +70,12 @@ class ConfirmSignUpFragment(private val signUpFragment: SignUpFragment) : Fragme
                             }
                         })
             } else {
-                binding.confirmButton.isEnabled = true
-                binding.confirmButton.backgroundTintMode = null
-                binding.confirmButton.setTextColor(Color.BLACK)
-                binding.codeEditText.isEnabled = true
+                binding.apply {
+                    confirmButton.isEnabled = true
+                    confirmButton.backgroundTintMode = null
+                    confirmButton.setTextColor(Color.BLACK)
+                    codeEditText.isEnabled = true
+                }
             }
         }
 
