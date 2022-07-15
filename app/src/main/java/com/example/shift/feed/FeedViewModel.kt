@@ -15,7 +15,6 @@ class FeedViewModel: ViewModel() {
     private val feedRepository = FeedRepository()
 
     private val _photoItems: MutableStateFlow<List<FeedItem>> = MutableStateFlow(emptyList())
-
     val photoItems: StateFlow<List<FeedItem>>
     get() = _photoItems.asStateFlow()
 

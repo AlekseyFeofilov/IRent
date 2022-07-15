@@ -72,7 +72,7 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
     private fun checkPasswords(password: String, confirmPassword: String): Boolean {
         when {
             password != confirmPassword -> showWarning("Passwords are different")
-            password.length < 6 -> showWarning("Password length must be more then 5 symbols")
+            password.length !in 8..32  -> showWarning("Password length must be in 8 to 32 symbols") //тестеры попросили
             Regex("[^A-Za-z_0-9]").containsMatchIn(password) -> showWarning("Password can contains only latin symbols, digital and symbol _")
             else -> return true
         }

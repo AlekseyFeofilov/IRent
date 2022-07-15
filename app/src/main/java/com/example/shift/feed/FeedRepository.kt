@@ -11,11 +11,14 @@ class FeedRepository {
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://api.flickr.com/")
+            .baseUrl("http://irental.ddns.net/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
         irentApi = retrofit.create()
     }
 
-    suspend fun fetchFeeds(): List<FeedItem> = irentApi.fetchFeeds().photos.photoItems
+    suspend fun fetchFeeds(): List<FeedItem> = irentApi.fetchFeeds()
+
+    suspend fun fetchCard(): FeedItem = irentApi.fetchCard()
+
 }
