@@ -1,20 +1,20 @@
-package com.example.shift.usercards
+package com.example.shift
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.shift.databinding.FragmentFavoritesBinding
+import com.example.shift.databinding.FragmentCreateCardBinding
 
-class FavoritesFragment : Fragment() {
-    private lateinit var binding: FragmentFavoritesBinding
+class CreateCardFragment : Fragment() {
+private lateinit var binding: FragmentCreateCardBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        binding = FragmentCreateCardBinding.inflate(inflater, container, false)
 
         return binding.root
     }

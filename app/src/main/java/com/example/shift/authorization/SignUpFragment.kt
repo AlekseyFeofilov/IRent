@@ -2,47 +2,52 @@ package com.example.shift.authorization
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.shift.OnAuthorized
+import androidx.navigation.fragment.NavHostFragment
 import com.example.shift.R
-import com.example.shift.SampleApp
-import com.example.shift.authorization.AuthorizationFragment.Companion.user
-import com.example.shift.authorization.data.Security
-import com.example.shift.authorization.data.User
+import com.example.shift.companion.IrentApp
+import com.example.shift.main.MainActivity
+import com.example.shift.companion.SharedPreferencesObject.Companion.APP_PREFERENCES_ID
+import com.example.shift.api.AuthorizationApi
+import com.example.shift.authorization.data.SignUpData
 import com.example.shift.databinding.FragmentSignUpBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener {
+class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var fm: FragmentManager
-    private var id: Long? = null
+    private lateinit var activity: MainActivity
+    private var currentUri = Uri.parse("android.resource://com.example.shift/" + R.drawable.ic_user)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        activity = requireActivity() as MainActivity
         fm = requireActivity().supportFragmentManager
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
         binding.submitButton.setOnClickListener(submit)
 
-        binding.addPhotoButton.setOnClickListener{
+        binding.addPhotoButton.setOnClickListener {
             getContent.launch("image/*")
         }
 
         return binding.root
     }
 
-    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        binding.iconImageView.setImageURI(uri)
-    }
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            binding.iconImageView.setImageURI(uri)
+            currentUri = uri
+        }
 
     private fun showWarning(warning: String) {
         binding.warningTextView.text = warning
@@ -57,12 +62,12 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
         confirmPassword: String
     ): Boolean {
         when {
-            name.isEmpty() -> showWarning("Enter name")
-            surname.isEmpty() -> showWarning("Enter surname")
-            email.isEmpty() -> showWarning("Enter email")
-            phoneNumber.isEmpty() -> showWarning("Enter phone number")
-            password.isEmpty() -> showWarning("Enter password")
-            confirmPassword.isEmpty() -> showWarning("Confirm password")
+            name.isEmpty() -> showWarning(getString(R.string.enter_name))
+            surname.isEmpty() -> showWarning(getString(R.string.enter_surname))
+            email.isEmpty() -> showWarning(getString(R.string.enter_email))
+            phoneNumber.isEmpty() -> showWarning(getString(R.string.enter_phone_number))
+            password.isEmpty() -> showWarning(getString(R.string.enter_password))
+            confirmPassword.isEmpty() -> showWarning(getString(R.string.confirm_password))
             else -> return true
         }
 
@@ -71,84 +76,54 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
 
     private fun checkPasswords(password: String, confirmPassword: String): Boolean {
         when {
-            password != confirmPassword -> showWarning("Passwords are different")
-            password.length !in 8..32  -> showWarning("Password length must be in 8 to 32 symbols") //тестеры попросили
-            Regex("[^A-Za-z_0-9]").containsMatchIn(password) -> showWarning("Password can contains only latin symbols, digital and symbol _")
+            password != confirmPassword -> showWarning(getString(R.string.passwords_are_different))
+            password.length !in 8..32 -> showWarning("Password length must be in 8 to 32 symbols")
+            Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$)[A-Za-z0-9!@%&]{8,}$").containsMatchIn(
+                password
+            ) -> showWarning(getString(R.string.password_can_contains_only_latin_symbols_digital_and_symbols))
             else -> return true
         }
 
         return false
     }
 
-    private fun checkEmail(email: String): Boolean {
-        var isContains = false
-
-        if (SampleApp.backendToggle) {
-            SampleApp.retrofit
-                .create(AuthorizationApi::class.java)
-                .contains(email)
-                .enqueue(object : Callback<Boolean> {
-                    override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
-                        if (response.body() == null) {
-                            showWarning("Something went wrong. Try again")
-                            return
-                        }
-
-                        isContains = response.body()!!
-                    }
-
-                    override fun onFailure(call: Call<Boolean>, t: Throwable) {
-                        // do something
-                    }
-
-                })
-        } else {
-            isContains = true
-        }
-
-        if (!isContains) {
-            showWarning("This email has already signed up")
-        }
-
-        return isContains
-    }
-
     private fun createUser(
         name: String,
-        uri: String,
+        //uri: String,
         surname: String,
         email: String,
         phoneNumber: String,
         password: String,
-    ): Long? {
-        var id: Long? = null
+    ) {
+        activity.onProgressStart()
 
-        if (SampleApp.backendToggle) {
-            SampleApp.retrofit
-                .create(AuthorizationApi::class.java)
-                .createUser(
-                    Security(0L, email, password),
-                    User(0L, /*uri,*/ name, surname, email, phoneNumber)
-                )
-                .enqueue(object : Callback<Long> {
-                    override fun onResponse(call: Call<Long>, response: Response<Long>) {
-                        if (response.body() == null) {
-                            showWarning("Something went wrong. Try again")
-                            return
-                        }
-
-                        id = response.body()
+        IrentApp.retrofit
+            .create(AuthorizationApi::class.java)
+            .signUp(SignUpData(name, surname, phoneNumber, email, password))
+            .enqueue(object : Callback<String> {
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>
+                ) {
+                    if (response.body() == null) {
+                        showWarning("Something went wrong. Try again")
+                        return
                     }
 
-                    override fun onFailure(call: Call<Long>, t: Throwable) {
-                        // do something
-                    }
-                })
-        } else {
-            id = 42
-        }
+                    val id = response.body().toString().toLong()
+                    activity.getSharedPreferences().edit().putLong(APP_PREFERENCES_ID, id).apply()
 
-        return id
+                    val navController = NavHostFragment.findNavController(this@SignUpFragment)
+                    navController.navigate(R.id.confirmSignUpFragment)
+
+                    activity.onProgressEnd()
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.e("Backend", t.toString())
+                    activity.onProgressEnd()
+                }
+            })
     }
 
     private val submit = View.OnClickListener {
@@ -161,64 +136,16 @@ class SignUpFragment : Fragment(), ConfirmSignUpFragment.OnConfirmEmailListener 
         val password = binding.passwordEditText.text.toString()
         val confirmPassword = binding.confirmPasswordEditText.text.toString()
 
-        if(SampleApp.authorizationToggle) {
+        if (IrentApp.validationToggle) {
             if (
                 !checkCompletion(name, surname, email, phoneNumber, password, confirmPassword) ||
-                !checkPasswords(password, confirmPassword) ||
-                !checkEmail(email)
+                !checkPasswords(password, confirmPassword)
             ) {
                 return@OnClickListener
             }
         }
 
-        val uri = Uri.parse("android.resource://com.example.shift/" + binding.iconImageView.drawable);
-
-        if(!SampleApp.backendToggle){
-            user = User(0, /*uri.toString(),*/ name, surname, email, phoneNumber)
-        }
-
-        id = createUser(name, uri.toString(), surname, email, phoneNumber, password) ?: return@OnClickListener
-
-        binding.confirmFrameLayout.visibility = View.VISIBLE
-        binding.submitButton.isEnabled = false
-
-        fm
-            .beginTransaction()
-            .add(R.id.confirmFrameLayout, ConfirmSignUpFragment(this))
-            .commit()
-    }
-
-    override fun onConfirmEmail(code: String) {
-        if (code.isEmpty()) {
-            showWarning("Enter code")
-            return
-        }
-
-        if (SampleApp.backendToggle) {
-            SampleApp.retrofit
-                .create(AuthorizationApi::class.java)
-                .confirmUser(id, binding.nameEditText.text.toString())
-                .enqueue(object : Callback<User> {
-                    override fun onResponse(call: Call<User>, response: Response<User>) {
-                        if (response.body() == null) {
-                            showWarning("Something went wrong. Try again")
-                            return
-                        }
-
-                        user = response.body()
-                    }
-
-                    override fun onFailure(call: Call<User>, t: Throwable) {
-                        // do something
-                    }
-
-                })
-        } else {
-            AuthorizationFragment.saveUser(requireActivity().getSharedPreferences(AuthorizationFragment.APP_PREFERENCES,
-                AppCompatActivity.MODE_PRIVATE
-            ))
-
-            (requireActivity() as OnAuthorized).onAuthorized()
-        }
+        //val uri = (requireActivity() as OnImageUpload).onImageUpload(currentUri)
+        createUser(name, /*uri.toString(),*/ surname, email, phoneNumber, password)
     }
 }

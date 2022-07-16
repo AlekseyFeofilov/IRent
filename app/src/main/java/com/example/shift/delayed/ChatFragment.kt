@@ -1,4 +1,4 @@
-package com.example.shift.chat
+package com.example.shift.delayed
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

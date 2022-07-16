@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E9E7E2"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".authorization.SignUpFragment">
 
@@ -21,7 +22,7 @@
         android:id="@+id/addPhotoButton"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/round_button"
         android:foreground="@drawable/ic_plus"
         app:layout_constraintBottom_toBottomOf="@id/iconImageView"
@@ -34,7 +35,7 @@
         android:textColor="#FF0000"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
-        app:layout_constraintTop_toTopOf="@+id/modeGuideline"
+        app:layout_constraintTop_toTopOf="@+id/warningGuideline"
         tools:text="Warning" />
 
     <EditText
@@ -136,15 +137,6 @@
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
         app:layout_constraintTop_toTopOf="@+id/submitStartGuideline" />
 
-    <FrameLayout
-        android:id="@+id/confirmFrameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:soundEffectsEnabled="false"
-        android:layout_marginBottom="-40dp"
-        android:visibility="gone">
-    </FrameLayout>
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/iconGuideline"
         android:layout_width="wrap_content"
@@ -153,7 +145,7 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/modeGuideline"
+        android:id="@+id/warningGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

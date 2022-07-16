@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#E9E7E2"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/navigationGuideline"
@@ -40,7 +40,6 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/nav_header_main"/>
 
-
     </androidx.drawerlayout.widget.DrawerLayout>
 
     <androidx.appcompat.widget.Toolbar
@@ -60,5 +59,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@id/navigationGuideline"
         app:labelVisibilityMode="unlabeled"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNavView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/drawerLayout"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
