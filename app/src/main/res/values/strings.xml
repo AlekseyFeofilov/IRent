@@ -30,4 +30,22 @@
     <string name="code">code</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="icon">icon</string>
+    <string name="title">Title</string>
+    <string name="address">Address</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
+    <string name="category">Category</string>
+    <string name="wrong_email_or_password">Wrong email or password</string>
+    <string name="entry_login">Entry login</string>
+    <string name="entry_password">Entry password</string>
+    <string name="enter_code">Enter code</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_surname">Enter surname</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="enter_password">Enter password</string>
+    <string name="passwords_are_different">Passwords are different</string>
+    <string name="password_length_must_be_more_then_5_symbols">Password length must be more then 5 symbols</string>
+    <string name="password_can_contains_only_latin_symbols_digital_and_symbols">Password can contains only latin symbols, digital and symbols _, !, @, %, &amp;</string>
+    <string name="You_re_not_authorized">You\'re not authorized</string>
 </resources>
