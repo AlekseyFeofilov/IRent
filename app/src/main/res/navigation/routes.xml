@@ -17,9 +17,13 @@
         tools:layout="@layout/fragment_create_card" />
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.example.shift.FeedFragment"
+        android:name="com.example.shift.feed.FeedFragment"
         android:label="Feed"
-        tools:layout="@layout/fragment_feed" />
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/show_card_detail"
+            app:destination="@id/cardDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.shift.delayed.FavoritesFragment"
@@ -65,4 +69,13 @@
         android:name="com.example.shift.authorization.ConfirmSignUpFragment"
         android:label="Confirm email"
         tools:layout="@layout/fragment_confirm_sign_up" />
+    <fragment
+        android:id="@+id/cardDetailsFragment"
+        android:name="com.example.shift.card.CardDetailsFragment"
+        android:label="CardDetailsFragment"
+        tools:layout="@layout/fragment_card_details">
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
 </navigation>
