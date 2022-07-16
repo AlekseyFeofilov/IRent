@@ -1,4 +1,4 @@
-package com.example.shift
+package com.example.shift.main
 
 interface OnAuthorized {
     fun onAuthorized()
