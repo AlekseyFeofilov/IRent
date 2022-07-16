@@ -1,20 +1,20 @@
-package com.example.shift.usercards
+package com.example.shift.delayed
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.shift.databinding.FragmentRentHistoryBinding
+import com.example.shift.databinding.FragmentRentedBinding
 
-class RentHistoryFragment : Fragment() {
-    private lateinit var binding: FragmentRentHistoryBinding
+class RentedFragment : Fragment() {
+    private lateinit var binding: FragmentRentedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRentHistoryBinding.inflate(inflater, container, false)
+        binding = FragmentRentedBinding.inflate(inflater, container, false)
 
         return binding.root
     }

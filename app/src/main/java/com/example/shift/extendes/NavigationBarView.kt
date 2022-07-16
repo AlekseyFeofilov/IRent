@@ -1,18 +1,17 @@
-package com.example.shift.utils
+package com.example.shift.extendes
 
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.core.view.forEach
-import androidx.customview.widget.Openable
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.navigation.NavigationView
+import com.example.shift.main.OnMenuItemSelectedListener
+import com.google.android.material.navigation.NavigationBarView
 import java.lang.ref.WeakReference
 
-fun NavigationView.setupWithNavControllerAndOnSelectedListener(
+fun NavigationBarView.setupWithNavControllerAndOnSelectedListener(
     navController: NavController,
     onMenuItemSelectedListener: OnMenuItemSelectedListener
 ) {
@@ -20,28 +19,19 @@ fun NavigationView.setupWithNavControllerAndOnSelectedListener(
 }
 
 private fun setupWithNavController(
-    navigationView: NavigationView,
+    navigationBarView: NavigationBarView,
     navController: NavController,
     onMenuItemSelectedListener: OnMenuItemSelectedListener
 ) {
-    navigationView.setNavigationItemSelectedListener { item ->
+    navigationBarView.setOnItemSelectedListener { item ->
         onMenuItemSelectedListener.onMenuItemSelectedListener(item)
 
-        val handled = NavigationUI.onNavDestinationSelected(item, navController)
-        if (handled) {
-            val parent = navigationView.parent
-            if (parent is Openable) {
-                parent.close()
-            } else {
-                val bottomSheetBehavior = NavigationUI.findBottomSheetBehavior(navigationView)
-                if (bottomSheetBehavior != null) {
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                }
-            }
-        }
-        handled
+        NavigationUI.onNavDestinationSelected(
+            item,
+            navController
+        )
     }
-    val weakReference = WeakReference(navigationView)
+    val weakReference = WeakReference(navigationBarView)
     navController.addOnDestinationChangedListener(
         object : NavController.OnDestinationChangedListener {
             override fun onDestinationChanged(
@@ -55,7 +45,9 @@ private fun setupWithNavController(
                     return
                 }
                 view.menu.forEach { item ->
-                    item.isChecked = destination.matchDestination(item.itemId)
+                    if (destination.matchDestination(item.itemId)) {
+                        item.isChecked = true
+                    }
                 }
             }
         })

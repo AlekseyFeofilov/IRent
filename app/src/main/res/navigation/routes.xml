@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.shift.chat.ChatFragment"
+        android:name="com.example.shift.delayed.ChatFragment"
         android:label="Chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/createCardFragment"
-        android:name="com.example.shift.card.CreateCardFragment"
+        android:name="com.example.shift.CreateCardFragment"
         android:label="Create new card"
         tools:layout="@layout/fragment_create_card" />
     <fragment
@@ -22,17 +22,17 @@
         tools:layout="@layout/fragment_feed" />
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.shift.usercards.FavoritesFragment"
+        android:name="com.example.shift.delayed.FavoritesFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/ownFragment"
-        android:name="com.example.shift.usercards.OwnFragment"
+        android:name="com.example.shift.delayed.OwnFragment"
         android:label="Own"
         tools:layout="@layout/fragment_own" />
     <fragment
         android:id="@+id/rentedFragment"
-        android:name="com.example.shift.usercards.RentedFragment"
+        android:name="com.example.shift.delayed.RentedFragment"
         android:label="Rented"
         tools:layout="@layout/fragment_rented" />
     <fragment
@@ -42,12 +42,12 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/walletFragment"
-        android:name="com.example.shift.wallet.WalletFragment"
+        android:name="com.example.shift.delayed.WalletFragment"
         android:label="Wallet"
         tools:layout="@layout/fragment_wallet" />
     <fragment
         android:id="@+id/rentHistoryFragment"
-        android:name="com.example.shift.usercards.RentHistoryFragment"
+        android:name="com.example.shift.delayed.RentHistoryFragment"
         android:label="Rent history"
         tools:layout="@layout/fragment_rent_history" />
     <fragment
@@ -60,4 +60,9 @@
         android:name="com.example.shift.authorization.SignUpFragment"
         android:label="Sign up"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/confirmSignUpFragment"
+        android:name="com.example.shift.authorization.ConfirmSignUpFragment"
+        android:label="Confirm email"
+        tools:layout="@layout/fragment_confirm_sign_up" />
 </navigation>
