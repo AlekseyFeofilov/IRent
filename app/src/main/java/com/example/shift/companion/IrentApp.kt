@@ -18,8 +18,8 @@ class IrentApp : Application() {
         const val confirmEmail = true
         const val signUp = true
         const val logIn = true
-        const val captchaToggle = false
-        const val validationToggle = false
+        const val captchaToggle = true
+        const val validationToggle = true
 
         private val interceptor: HttpLoggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
