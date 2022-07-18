@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/authorizationFragment"
+            android:icon="@drawable/ic_log_out"
+            android:title="@string/log_in" />
+
+        <item
+            android:id="@+id/signUpFragment"
+            android:icon="@drawable/ic_log_out"
+            android:title="@string/sign_up" />
+    </group>
+
+</menu>

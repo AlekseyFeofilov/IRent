@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/routes"
+    app:startDestination="@id/feedFragment">
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.shift.delayed.ChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/createCardFragment"
+        android:name="com.example.shift.CreateCardFragment"
+        android:label="Create new card"
+        tools:layout="@layout/fragment_create_card" />
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.example.shift.feed.FeedFragment"
+        android:label="Feed"
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/show_card_detail"
+            app:destination="@id/cardDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.shift.delayed.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/ownFragment"
+        android:name="com.example.shift.delayed.OwnFragment"
+        android:label="Own"
+        tools:layout="@layout/fragment_own" />
+    <fragment
+        android:id="@+id/rentedFragment"
+        android:name="com.example.shift.delayed.RentedFragment"
+        android:label="Rented"
+        tools:layout="@layout/fragment_rented" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.shift.SettingsFragment"
+        android:label="Setting"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.example.shift.delayed.WalletFragment"
+        android:label="Wallet"
+        tools:layout="@layout/fragment_wallet" />
+    <fragment
+        android:id="@+id/rentHistoryFragment"
+        android:name="com.example.shift.delayed.RentHistoryFragment"
+        android:label="Rent history"
+        tools:layout="@layout/fragment_rent_history" />
+    <fragment
+        android:id="@+id/authorizationFragment"
+        android:name="com.example.shift.authorization.AuthorizationFragment"
+        android:label="Log in"
+        tools:layout="@layout/fragment_authorization" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.shift.authorization.SignUpFragment"
+        android:label="Sign up"
+        tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/confirmSignUpFragment"
+        android:name="com.example.shift.authorization.ConfirmSignUpFragment"
+        android:label="Confirm email"
+        tools:layout="@layout/fragment_confirm_sign_up" />
+    <fragment
+        android:id="@+id/cardDetailsFragment"
+        android:name="com.example.shift.card.CardDetailsFragment"
+        android:label="CardDetailsFragment"
+        tools:layout="@layout/fragment_card_details">
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+</navigation>
