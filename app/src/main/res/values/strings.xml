@@ -48,4 +48,6 @@
     <string name="password_length_must_be_more_then_5_symbols">Password length must be more then 5 symbols</string>
     <string name="password_can_contains_only_latin_symbols_digital_and_symbols">Password can contains only latin symbols, digital and symbols _, !, @, %, &amp;</string>
     <string name="You_re_not_authorized">You\'re not authorized</string>
+    <string name="password_length_must_be_in_8_to_32_symbols">Password length must be in 8 to 32 symbols</string>
+    <string name="password_must_contains_one_caps_capital_spelled_and_digit_at_least">Password must contains one caps capital, spelled and digit at least</string>
 </resources>
