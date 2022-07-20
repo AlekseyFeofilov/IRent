@@ -1,7 +1,5 @@
-package com.example.shift.feed
+package com.example.shift.card.feed
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

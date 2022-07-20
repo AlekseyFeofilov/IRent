@@ -1,4 +1,4 @@
-package com.example.shift.card
+package com.example.shift.card.details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,12 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.shift.R
 import com.example.shift.databinding.FragmentCardDetailsBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CardDetailsFragment : Fragment() {

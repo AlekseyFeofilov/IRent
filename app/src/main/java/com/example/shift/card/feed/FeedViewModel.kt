@@ -1,4 +1,4 @@
-package com.example.shift.feed
+package com.example.shift.card.feed
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

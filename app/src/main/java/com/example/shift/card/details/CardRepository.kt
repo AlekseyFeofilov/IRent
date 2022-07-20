@@ -1,4 +1,4 @@
-package com.example.shift.card
+package com.example.shift.card.details
 
 import com.example.shift.api.FeedItem
 import com.example.shift.api.IrentApi

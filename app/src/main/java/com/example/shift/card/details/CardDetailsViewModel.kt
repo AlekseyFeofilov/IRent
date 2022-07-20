@@ -1,4 +1,4 @@
-package com.example.shift.card
+package com.example.shift.card.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

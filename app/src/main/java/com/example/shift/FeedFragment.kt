@@ -1,4 +1,4 @@
-package com.example.shift.feed
+package com.example.shift
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.shift.card.feed.FeedListAdapter
+import com.example.shift.card.feed.FeedViewModel
 import com.example.shift.databinding.FragmentFeedBinding
 import kotlinx.coroutines.launch
 
@@ -40,7 +42,11 @@ class FeedFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 feedViewModel.feedItems.collect { items ->
                     binding.cardGrid.adapter = FeedListAdapter(items) { id ->
-                        findNavController().navigate(FeedFragmentDirections.showCardDetail(id))
+                        findNavController().navigate(
+                            FeedFragmentDirections.showCardDetail(
+                                id
+                            )
+                        )
                     }
                 }
             }
