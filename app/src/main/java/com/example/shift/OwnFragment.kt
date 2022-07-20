@@ -15,7 +15,6 @@ import com.example.shift.card.info.CardOption
 import com.example.shift.companion.IrentApp
 import com.example.shift.companion.SharedPreferencesObject.Companion.user
 import com.example.shift.databinding.FragmentOwnBinding
-import com.example.shift.main.MainActivity
 import com.example.shift.main.NavControllerActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,11 +50,11 @@ class OwnFragment : Fragment(), CardOption {
                     response: Response<List<Long>>
                 ) {
                     if (response.body() == null) {
-                        showMessage("Something went wrong. Try again")
+                        showMessage(getString(R.string.something_went_wrong_try_again))
                         return
                     }
 
-                    if (response.body()!!.isEmpty()) showMessage("You haven't own cards yet")
+                    if (response.body()!!.isEmpty()) showMessage(getString(R.string.ypu_haven_t_own_cards_yet))
 
                     ownCardId = response.body()!!
                 }
