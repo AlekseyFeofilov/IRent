@@ -62,4 +62,6 @@
     <string name="end_renting">End renting</string>
     <string name="ypu_haven_t_own_cards_yet">You haven\'t own cards yet</string>
     <string name="delete_account">Delete account</string>
+    <string name="you_haven_t_internet_connection">You haven\'t Internet connection</string>
+    <string name="try_again">Try again</string>
 </resources>

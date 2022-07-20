@@ -10,6 +10,7 @@
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/drawable/splash_screen.xml" value="0.1025" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/activity_authorization.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/activity_main.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/activity_no_interner.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/activity_sign_up.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/content_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_authorization.xml" value="0.25416666666666665" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_create_card.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_favorites.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_feed.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_no_internet.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_own.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_rent_history.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aleksey/AndroidStudioProjects/Shift/app/src/main/res/layout/fragment_rented.xml" value="0.25416666666666665" />
