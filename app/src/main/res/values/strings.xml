@@ -50,4 +50,14 @@
     <string name="You_re_not_authorized">You\'re not authorized</string>
     <string name="password_length_must_be_in_8_to_32_symbols">Password length must be in 8 to 32 symbols</string>
     <string name="password_must_contains_one_caps_capital_spelled_and_digit_at_least">Password must contains one caps capital, spelled and digit at least</string>
+    <string name="options">options</string>
+    <string name="enter_category">Enter category</string>
+    <string name="enter_title">Enter title</string>
+    <string name="enter_price">Enter price</string>
+    <string name="enter_description">Enter description</string>
+    <string name="enter_address">Enter address</string>
+    <string name="something_went_wrong_try_again">Something went wrong. Try again</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="end_renting">End renting</string>
 </resources>

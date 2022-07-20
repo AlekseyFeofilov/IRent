@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_create_card" />
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.example.shift.feed.FeedFragment"
+        android:name="com.example.shift.FeedFragment"
         android:label="Feed"
         tools:layout="@layout/fragment_feed" >
         <action
@@ -31,17 +31,17 @@
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/ownFragment"
-        android:name="com.example.shift.delayed.OwnFragment"
+        android:name="com.example.shift.OwnFragment"
         android:label="Own"
         tools:layout="@layout/fragment_own" />
     <fragment
         android:id="@+id/rentedFragment"
-        android:name="com.example.shift.delayed.RentedFragment"
+        android:name="com.example.shift.RentedFragment"
         android:label="Rented"
         tools:layout="@layout/fragment_rented" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.shift.SettingsFragment"
+        android:name="com.example.shift.delayed.SettingsFragment"
         android:label="Setting"
         tools:layout="@layout/fragment_settings" />
     <fragment
@@ -71,7 +71,7 @@
         tools:layout="@layout/fragment_confirm_sign_up" />
     <fragment
         android:id="@+id/cardDetailsFragment"
-        android:name="com.example.shift.card.CardDetailsFragment"
+        android:name="com.example.shift.card.details.CardDetailsFragment"
         android:label="CardDetailsFragment"
         tools:layout="@layout/fragment_card_details">
         <argument
