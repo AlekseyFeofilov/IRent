@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="@color/white"
+    android:padding="8dp">
+
+    <ImageButton
+        android:id="@+id/optionImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00000000"
+        android:contentDescription="@string/options"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+
+    <LinearLayout
+        android:id="@+id/optionLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#EEEEEE"
+        android:minWidth="200dp"
+        android:minHeight="50dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/optionImageButton"
+        app:layout_constraintTop_toTopOf="@+id/optionImageButton">
+
+        <TextView
+            android:id="@+id/editCardTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit" />
+
+        <TextView
+            android:id="@+id/deleteCardTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete" />
+
+        <TextView
+            android:id="@+id/endCardRentingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/end_renting" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="title" />
+
+    <TextView
+        android:id="@+id/ownerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+        tools:text="owner" />
+
+    <TextView
+        android:id="@+id/priceTextView"
+        style="@style/small_text_view"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/termTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/termTextView"
+        tools:text="price" />
+
+    <TextView
+        android:id="@+id/statusTextView"
+        style="@style/small_text_view"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/termTextView"
+        app:layout_constraintStart_toEndOf="@+id/priceTextView"
+        app:layout_constraintTop_toTopOf="@+id/termTextView"
+        tools:text="status" />
+
+    <TextView
+        android:id="@+id/termTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/round_frame"
+        android:backgroundTint="#DDDDDD"
+        android:gravity="center|center"
+        android:paddingStart="16dp"
+        android:paddingEnd="8dp"
+        app:drawableEndCompat="@android:drawable/ic_menu_recent_history"
+        app:drawableTint="#777777"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ownerTextView"
+        tools:text="term" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
