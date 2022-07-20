@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity(),
     OnAuthorized,
     OnImageUpload,
     Settings,
-    OnProgress
-{
+    OnProgress,
+    NavControllerActivity {
     private lateinit var binding: ActivityMainBinding
     private lateinit var fragmentManager: FragmentManager
     private lateinit var sharedPreferences: SharedPreferences
@@ -120,5 +120,9 @@ class MainActivity : AppCompatActivity(),
 
     override fun onProgressEnd() {
         binding.progressBar.visibility = View.INVISIBLE
+    }
+
+    override fun showMessage(message: String) {
+        binding.messageTextView.text = message
     }
 }

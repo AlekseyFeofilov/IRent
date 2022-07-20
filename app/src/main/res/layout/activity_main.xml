@@ -32,6 +32,11 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/routes" />
 
+        <TextView
+            android:id="@+id/messageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navView"
             android:layout_width="wrap_content"

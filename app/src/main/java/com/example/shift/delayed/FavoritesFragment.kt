@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.shift.databinding.FragmentFavoritesBinding
+import com.example.shift.main.NavControllerActivity
 
 class FavoritesFragment : Fragment() {
     private lateinit var binding: FragmentFavoritesBinding
@@ -15,7 +16,12 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-
+        (requireActivity() as NavControllerActivity).showMessage("This fragment is developing")
         return binding.root
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as NavControllerActivity).showMessage("")
     }
 }
