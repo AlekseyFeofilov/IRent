@@ -74,6 +74,10 @@ class MainActivity : AppCompatActivity(),
         binding.buttonNavView.menu.setGroupCheckable(0, isBacklight, true)
     }
 
+    override fun goTo(fragmentId: Int){
+        binding.buttonNavView.menu.performIdentifierAction(fragmentId, 0)
+    }
+
     override fun onMenuItemSelectedListener(item: MenuItem) {
         binding.drawerLayout.close()
 
