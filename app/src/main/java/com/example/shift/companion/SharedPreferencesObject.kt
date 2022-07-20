@@ -18,6 +18,13 @@ class SharedPreferencesObject {
                 .putString(APP_PREFERENCES_USER, Gson().toJson(user))
                 .apply()
         }
+
+        fun deleteUser(sharedPreferences: SharedPreferences){
+            sharedPreferences
+                .edit()
+                .remove(APP_PREFERENCES_USER)
+                .apply()
+        }
     }
 
 }
