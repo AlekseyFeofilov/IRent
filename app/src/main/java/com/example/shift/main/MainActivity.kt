@@ -16,6 +16,7 @@ import com.example.shift.*
 import com.example.shift.companion.SharedPreferencesObject.Companion.APP_PREFERENCES
 import com.example.shift.companion.SharedPreferencesObject.Companion.APP_PREFERENCES_ID
 import com.example.shift.companion.SharedPreferencesObject.Companion.APP_PREFERENCES_USER
+import com.example.shift.companion.SharedPreferencesObject.Companion.deleteUser
 import com.example.shift.companion.SharedPreferencesObject.Companion.saveUser
 import com.example.shift.companion.SharedPreferencesObject.Companion.user
 import com.example.shift.databinding.ActivityMainBinding
@@ -108,6 +109,13 @@ class MainActivity : AppCompatActivity(),
     override fun onAuthorized() {
         binding.buttonNavView.menu.performIdentifierAction(R.id.feedFragment, 0)
         saveUser(sharedPreferences)
+        tuneNavigation()
+    }
+
+    override fun onLogOut() {
+        binding.buttonNavView.menu.performIdentifierAction(R.id.feedFragment, 0)
+        user = null
+        deleteUser(sharedPreferences)
         tuneNavigation()
     }
 
