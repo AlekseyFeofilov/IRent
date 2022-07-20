@@ -41,6 +41,9 @@ class MainActivity : AppCompatActivity(),
         user = getUser()
         setContentView(binding.root)
 
+        /*user = User(0, "Aleksey", "Feofilov", "no email", "no phone number")
+        saveUser(sharedPreferences)*/
+
         val host = fragmentManager.findFragmentById(R.id.navFragment) as NavHostFragment? ?: return
         val navController = host.navController
         val appBarConfiguration =
@@ -58,7 +61,8 @@ class MainActivity : AppCompatActivity(),
         val header = binding.navView.getHeaderView(0)
 
         if (user == null) {
-            header.findViewById<TextView>(R.id.titleTextView).text = getString(R.string.You_re_not_authorized)
+            header.findViewById<TextView>(R.id.titleTextView).text =
+                getString(R.string.You_re_not_authorized)
             binding.navView.inflateMenu(R.menu.drawer_menu_not_authorized)
             binding.buttonNavView.inflateMenu(R.menu.button_nav_menu_not_authorized)
             return
