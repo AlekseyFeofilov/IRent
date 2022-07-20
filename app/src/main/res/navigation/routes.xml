@@ -41,7 +41,7 @@
         tools:layout="@layout/fragment_rented" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.shift.delayed.SettingsFragment"
+        android:name="com.example.shift.authorization.SettingsFragment"
         android:label="Setting"
         tools:layout="@layout/fragment_settings" />
     <fragment
@@ -78,4 +78,9 @@
             android:name="id"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/logOutFragment"
+        android:name="com.example.shift.authorization.LogOutFragment"
+        android:label="Log out"
+        tools:layout="@layout/fragment_authorization"/>
 </navigation>
