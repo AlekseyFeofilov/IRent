@@ -7,12 +7,4 @@
     android:soundEffectsEnabled="false"
     tools:context=".delayed.ChatFragment">
 
-    <TextView
-        android:id="@+id/toolsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chat Fragment"
-        android:textSize="32sp"
-        tools:ignore="HardcodedText"/>
-
 </LinearLayout>

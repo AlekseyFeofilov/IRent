@@ -10,10 +10,8 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/navigationGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.93" />
+        app:layout_constraintGuide_percent="0.93"
+        style="@style/horizontal_guideline" />
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"

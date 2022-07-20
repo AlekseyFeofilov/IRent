@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:soundEffectsEnabled="false"
     android:background="#E9E7E2"
+    android:soundEffectsEnabled="false"
     tools:context=".CreateCardFragment">
 
     <ImageView
         android:id="@+id/iconBackgroundImageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:scaleType="fitCenter"
         android:background="@drawable/round_button"
         android:backgroundTint="@color/white"
+        android:contentDescription="@string/icon"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/photoGuideline"
-        android:contentDescription="@string/icon" />
+        app:layout_constraintTop_toTopOf="@+id/photoGuideline" />
 
     <ImageView
         android:id="@+id/iconImageView"
@@ -45,9 +45,7 @@
 
     <TextView
         android:id="@+id/warningTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#FF0000"
+        style="@style/warning_text_view"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
         app:layout_constraintTop_toTopOf="@+id/warningGuideline"
@@ -55,27 +53,19 @@
 
     <EditText
         android:id="@+id/titleEditText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/rounded_edit_text_view"
+        style="@style/copyable_field_edit_text"
         android:hint="@string/title"
         android:inputType="text"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/titleEndGuideline"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
-        app:layout_constraintTop_toTopOf="@+id/titileStartGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/titleStartGuideline" />
 
     <EditText
         android:id="@+id/addressEditText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/rounded_edit_text_view"
+        style="@style/copyable_field_edit_text"
         android:hint="@string/address"
         android:inputType="text"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/addressEndGuideline"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
@@ -83,13 +73,9 @@
 
     <EditText
         android:id="@+id/descriptionEditText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/rounded_edit_text_view"
+        style="@style/copyable_field_edit_text"
         android:hint="@string/description"
         android:inputType="text"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/descriptionEndGuideline"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
@@ -97,13 +83,9 @@
 
     <EditText
         android:id="@+id/priceEditText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/rounded_edit_text_view"
+        style="@style/copyable_field_edit_text"
         android:hint="@string/price"
         android:inputType="number"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/priceEndGuideline"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
@@ -111,13 +93,9 @@
 
     <EditText
         android:id="@+id/categoryEditText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/rounded_edit_text_view"
+        style="@style/copyable_field_edit_text"
         android:hint="@string/category"
-        android:inputType="textPassword"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/black"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/categoryEndGuideline"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
@@ -125,14 +103,9 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submitButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        style="@style/plane_button"
         android:layout_marginHorizontal="40dp"
-        android:background="@color/colorPrimary"
         android:text="@string/submit"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/confirmPasswordEndGuideline"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
@@ -140,121 +113,87 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/photoGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/warningGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.28" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/titileStartGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:id="@+id/titleStartGuideline"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.34" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/titleEndGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/addressStartGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.42" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/addressEndGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.48" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/descriptionStartGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.50" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/descriptionEndGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.56" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/priceStartGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.58" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/priceEndGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.64" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/categoryStartGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.66" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/categoryEndGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.72" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/confirmPasswordStartGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.74" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/confirmPasswordEndGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        style="@style/horizontal_guideline"
         app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalCenterGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        style="@style/vertical_guideline"
         app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/startGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        style="@style/vertical_guideline"
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/endGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        style="@style/vertical_guideline"
         app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
