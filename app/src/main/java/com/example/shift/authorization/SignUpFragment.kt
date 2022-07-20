@@ -78,7 +78,7 @@ class SignUpFragment : Fragment() {
         when {
             password != confirmPassword -> showWarning(getString(R.string.passwords_are_different))
             password.length !in 8..32 -> showWarning(getString(R.string.password_length_must_be_in_8_to_32_symbols))
-            !Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$)").containsMatchIn(
+            !Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])").containsMatchIn(
                 password
             ) -> showWarning(getString(R.string.password_must_contains_one_caps_capital_spelled_and_digit_at_least))
             !Regex("^[A-Za-z0-9!@%&]{8,}$").containsMatchIn(password) -> showWarning(getString(R.string.password_can_contains_only_latin_symbols_digital_and_symbols))
