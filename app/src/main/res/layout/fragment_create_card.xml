@@ -62,9 +62,9 @@
         app:layout_constraintTop_toTopOf="@+id/titleStartGuideline" />
 
     <EditText
-        android:id="@+id/addressEditText"
+        android:id="@+id/termEditText"
         style="@style/copyable_field_edit_text"
-        android:hint="@string/address"
+        android:hint="@string/term"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/addressEndGuideline"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"

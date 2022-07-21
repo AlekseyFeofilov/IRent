@@ -10,6 +10,7 @@ import com.example.shift.api.CardApi
 import com.example.shift.card.data.NewCard
 import com.example.shift.card.info.CardInfo
 import com.example.shift.companion.IrentApp
+import com.example.shift.companion.SharedPreferencesObject.Companion.user
 import com.example.shift.databinding.FragmentCreateCardBinding
 import com.example.shift.main.MainActivity
 import com.example.shift.main.NavControllerActivity
@@ -18,7 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CreateCardFragment : Fragment() {
-private lateinit var binding: FragmentCreateCardBinding
+    private lateinit var binding: FragmentCreateCardBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,18 +30,18 @@ private lateinit var binding: FragmentCreateCardBinding
         return binding.root
     }
 
-    private fun showWarning(warning: String){
+    private fun showWarning(warning: String) {
         binding.warningTextView.text = warning
     }
 
-    private fun checkCompletion(newCard: NewCard): Boolean{
+    private fun checkCompletion(newCard: NewCard): Boolean {
         newCard.apply {
             when {
                 category.isEmpty() -> showWarning(getString(R.string.enter_category))
                 title.isEmpty() -> showWarning(getString(R.string.enter_title))
-                price.isEmpty() -> showWarning(getString(R.string.enter_price))
+                price == -1L -> showWarning(getString(R.string.enter_price))
                 description.isEmpty() -> showWarning(getString(R.string.enter_description))
-                address.isEmpty() -> showWarning(getString(R.string.enter_address))
+                term.isEmpty() -> showWarning(getString(R.string.enter_address))
                 else -> return true
             }
         }
@@ -55,18 +56,25 @@ private lateinit var binding: FragmentCreateCardBinding
         val title = binding.titleEditText.text.toString()
         val price = binding.priceEditText.text.toString()
         val description = binding.descriptionEditText.text.toString()
-        val address = binding.addressEditText.text.toString()
+        val term = binding.termEditText.text.toString()
 
-        val newCard = NewCard(title, category, price, description, address)
+        val newCard = NewCard(
+            title,
+            category,
+            if (price.isEmpty()) -1 else price.toLong(),
+            description,
+            term,
+            user!!.id
+        )
 
-        if(!checkCompletion(newCard)){
+        if (!checkCompletion(newCard)) {
             return@OnClickListener
         }
 
         createCard(newCard)
     }
 
-    private fun createCard(newCard: NewCard){
+    private fun createCard(newCard: NewCard) {
         IrentApp.retrofit
             .create(CardApi::class.java)
             .createCard(newCard)

@@ -14,11 +14,11 @@ interface CardApi {
     fun getRentedCards(@Body id: Long): Call<List<Long>>
 
     @GET("/cards")
-    fun getCard(id: Long): Call<CardInfo>
+    fun getCard(@Body id: Long): Call<CardInfo>
 
     @PUT("/me/own")
-    fun createCard(newCard: NewCard): Call<Boolean>
+    fun createCard(@Body newCard: NewCard): Call<Boolean>
 
     @DELETE("/me/own")
-    fun deleteCard(cardAndUserId: CardAndUserId): Call<Boolean>
+    fun deleteCard(@Body cardAndUserId: CardAndUserId): Call<Boolean>
 }
