@@ -78,12 +78,12 @@ class CreateCardFragment : Fragment() {
         IrentApp.retrofit
             .create(CardApi::class.java)
             .createCard(newCard)
-            .enqueue(object : Callback<Boolean> {
+            .enqueue(object : Callback<Long> {
                 override fun onResponse(
-                    call: Call<Boolean>,
-                    response: Response<Boolean>
+                    call: Call<Long>,
+                    response: Response<Long>
                 ) {
-                    if (response.body() == null || response.body() == false) {
+                    if (response.body() == null) {
                         showWarning(getString(R.string.something_went_wrong_try_again))
                         return
                     }
@@ -91,7 +91,7 @@ class CreateCardFragment : Fragment() {
                     (requireActivity() as NavControllerActivity).goTo(R.id.ownFragment)
                 }
 
-                override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                override fun onFailure(call: Call<Long>, t: Throwable) {
                     Log.e("Backend", t.toString())
                 }
             })

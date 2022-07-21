@@ -17,7 +17,7 @@ interface CardApi {
     fun getCard(@Body id: Long): Call<CardInfo>
 
     @PUT("/me/own")
-    fun createCard(@Body newCard: NewCard): Call<Boolean>
+    fun createCard(@Body newCard: NewCard): Call<Long>
 
     @DELETE("/me/own")
     fun deleteCard(@Body cardAndUserId: CardAndUserId): Call<Boolean>
