@@ -31,7 +31,7 @@
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/ownFragment"
-        android:name="com.example.shift.OwnFragment"
+        android:name="com.example.shift.card.own.OwnFragment"
         android:label="Own"
         tools:layout="@layout/fragment_own" />
     <fragment

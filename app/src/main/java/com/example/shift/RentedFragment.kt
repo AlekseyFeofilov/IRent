@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.shift.OwnFragment.Companion.getCardsById
+import com.example.shift.card.own.OwnFragment.Companion.getCardsById
 import com.example.shift.api.CardApi
 import com.example.shift.card.info.CardInfo
 import com.example.shift.card.info.CardInfoRecyclerAdapter

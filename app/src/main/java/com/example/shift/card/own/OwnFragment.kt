@@ -1,12 +1,13 @@
-package com.example.shift
+package com.example.shift.card.own
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.shift.R
 import com.example.shift.api.CardApi
 import com.example.shift.card.info.CardAndUserId
 import com.example.shift.card.info.CardInfo
@@ -29,7 +30,21 @@ class OwnFragment : Fragment(), CardOption {
     ): View {
         binding = FragmentOwnBinding.inflate(inflater, container, false)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = CardInfoRecyclerAdapter(getOwnCards(), this)
+/*
+        viewLifecycleOwner.lifecycleScope.launch {
+            binding.recyclerView.adapter = CardInfoRecyclerAdapter(getOwnCards(), this@OwnFragment)
+        }
+*/
+        val thread = Thread {
+            try {
+                binding.recyclerView.adapter = CardInfoRecyclerAdapter(getOwnCards(), this@OwnFragment)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        thread.start()
+
         return binding.root
     }
 
@@ -38,31 +53,20 @@ class OwnFragment : Fragment(), CardOption {
     }
 
     private fun getOwnCards(): List<CardInfo> {
-        var ownCardId: List<Long> = emptyList()
         showMessage("")
 
-        IrentApp.retrofit
+        val ownCardId = IrentApp.retrofit
             .create(CardApi::class.java)
-            .getOwnCards(user!!.id)
-            .enqueue(object : Callback<List<Long>> {
-                override fun onResponse(
-                    call: Call<List<Long>>,
-                    response: Response<List<Long>>
-                ) {
-                    if (response.body() == null) {
-                        showMessage(getString(R.string.something_went_wrong_try_again))
-                        return
-                    }
+            .getOwnCards(UserId(user!!.id))
+            .execute()
+            .body()
 
-                    if (response.body()!!.isEmpty()) showMessage(getString(R.string.ypu_haven_t_own_cards_yet))
+        if (ownCardId == null) {
+            showMessage(getString(R.string.something_went_wrong_try_again))
+            return emptyList()
+        }
 
-                    ownCardId = response.body()!!
-                }
-
-                override fun onFailure(call: Call<List<Long>>, t: Throwable) {
-                    Log.e("Backend", t.toString())
-                }
-            })
+        if (ownCardId.isEmpty()) showMessage(getString(R.string.ypu_haven_t_own_cards_yet))
 
         return getCardsById(ownCardId)
     }

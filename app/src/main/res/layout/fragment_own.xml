@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#E9E7E2"
-        tools:context=".OwnFragment"
+        tools:context=".card.own.OwnFragment"
         tools:listitem="@layout/item_card_info">
 
     </androidx.recyclerview.widget.RecyclerView>
