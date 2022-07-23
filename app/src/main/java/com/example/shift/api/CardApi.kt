@@ -20,6 +20,6 @@ interface CardApi {
     @PUT("/me/own")
     fun createCard(@Body newCard: NewCard): Call<Long>
 
-    @DELETE("/me/own")
+    @HTTP(method = "DELETE", path = "/me/own", hasBody = true)
     fun deleteCard(@Body cardAndUserId: CardAndUserId): Call<Boolean>
 }
