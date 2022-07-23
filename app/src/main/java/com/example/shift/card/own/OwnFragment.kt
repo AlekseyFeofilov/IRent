@@ -23,6 +23,7 @@ import retrofit2.Response
 
 class OwnFragment : Fragment(), CardOption {
     private lateinit var binding: FragmentOwnBinding
+    private lateinit var adapter: CardInfoRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,73 +31,66 @@ class OwnFragment : Fragment(), CardOption {
     ): View {
         binding = FragmentOwnBinding.inflate(inflater, container, false)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-/*
-        viewLifecycleOwner.lifecycleScope.launch {
-            binding.recyclerView.adapter = CardInfoRecyclerAdapter(getOwnCards(), this@OwnFragment)
-        }
-*/
-        val thread = Thread {
-            try {
-                binding.recyclerView.adapter = CardInfoRecyclerAdapter(getOwnCards(), this@OwnFragment)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-
-        thread.start()
-
+        adapter = CardInfoRecyclerAdapter(this)
+        binding.recyclerView.adapter = adapter
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        showOwnCards()
     }
 
     fun showMessage(message: String) {
         binding.messageTextView.text = message
     }
 
-    private fun getOwnCards(): List<CardInfo> {
+    private fun showOwnCards() {
         showMessage("")
 
-        val ownCardId = IrentApp.retrofit
+        IrentApp.retrofit
             .create(CardApi::class.java)
             .getOwnCards(UserId(user!!.id))
-            .execute()
-            .body()
+            .enqueue(object : Callback<List<Long>> {
+                override fun onResponse(
+                    call: Call<List<Long>>,
+                    response: Response<List<Long>>
+                ) {
+                    if (response.body() == null) {
+                        showMessage(getString(R.string.something_went_wrong_try_again))
+                    }
 
-        if (ownCardId == null) {
-            showMessage(getString(R.string.something_went_wrong_try_again))
-            return emptyList()
-        }
+                    if (response.body()!!.isEmpty()) showMessage(getString(R.string.ypu_haven_t_own_cards_yet))
 
-        if (ownCardId.isEmpty()) showMessage(getString(R.string.ypu_haven_t_own_cards_yet))
+                    response.body()!!.forEach {
+                        getOwnCardById(it)
+                    }
+                }
 
-        return getCardsById(ownCardId)
+                override fun onFailure(call: Call<List<Long>>, t: Throwable) {
+                    Log.e("Backend", t.toString())
+                }
+            })
     }
 
-    companion object {
-        fun getCardsById(cardsId: List<Long>): List<CardInfo> {
-            val ownCards = mutableListOf<CardInfo>()
+    private fun getOwnCardById(cardId: Long) {
+        IrentApp.retrofit
+            .create(CardApi::class.java)
+            .getCard(cardId)
+            .enqueue(object : Callback<CardInfo> {
+                override fun onResponse(
+                    call: Call<CardInfo>,
+                    response: Response<CardInfo>
+                ) {
+                    if (response.body() == null) return
 
-            cardsId.forEach {
-                IrentApp.retrofit
-                    .create(CardApi::class.java)
-                    .getCard(it)
-                    .enqueue(object : Callback<CardInfo> {
-                        override fun onResponse(
-                            call: Call<CardInfo>,
-                            response: Response<CardInfo>
-                        ) {
-                            if (response.body() == null) return
+                    adapter.cards += response.body()!!
+                }
 
-                            ownCards.add(response.body()!!)
-                        }
-
-                        override fun onFailure(call: Call<CardInfo>, t: Throwable) {
-                            Log.e("Backend", t.toString())
-                        }
-                    })
-            }
-
-            return ownCards
-        }
+                override fun onFailure(call: Call<CardInfo>, t: Throwable) {
+                    Log.e("Backend", t.toString())
+                }
+            })
     }
 
     override fun editCard(cardInfo: CardInfo) {

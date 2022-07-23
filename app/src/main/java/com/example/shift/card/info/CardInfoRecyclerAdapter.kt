@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shift.databinding.ItemCardInfoBinding
 
-class CardInfoRecyclerAdapter(
-    private var cards: List<CardInfo>,
-    private val cardOption: CardOption
-) :
+class CardInfoRecyclerAdapter(private val cardOption: CardOption) :
     RecyclerView.Adapter<CardInfoRecyclerAdapter.CardInfoViewHolder>() {
+
+    var cards: List<CardInfo> = emptyList()
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
 
     class CardInfoViewHolder(val binding: ItemCardInfoBinding) :
         RecyclerView.ViewHolder(binding.root)

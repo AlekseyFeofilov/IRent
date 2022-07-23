@@ -1,23 +1,14 @@
 package com.example.shift
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.shift.card.own.OwnFragment.Companion.getCardsById
-import com.example.shift.api.CardApi
 import com.example.shift.card.info.CardInfo
-import com.example.shift.card.info.CardInfoRecyclerAdapter
 import com.example.shift.card.info.CardOption
-import com.example.shift.companion.IrentApp
-import com.example.shift.companion.SharedPreferencesObject.Companion.user
 import com.example.shift.databinding.FragmentRentedBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RentedFragment : Fragment(), CardOption {
     private lateinit var binding: FragmentRentedBinding
@@ -28,7 +19,7 @@ class RentedFragment : Fragment(), CardOption {
     ): View {
         binding = FragmentRentedBinding.inflate(inflater, container, false)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = CardInfoRecyclerAdapter(getRentedCards(), this)
+        //binding.recyclerView.adapter = CardInfoRecyclerAdapter(getRentedCards(), this)
         return binding.root
     }
 
@@ -36,7 +27,7 @@ class RentedFragment : Fragment(), CardOption {
         binding.messageTextView.text = message
     }
 
-    private fun getRentedCards(): List<CardInfo> {
+  /*  private fun getRentedCards(): List<CardInfo> {
         var rentedCards: List<Long> = emptyList()
         showMessage("")
 
@@ -64,7 +55,7 @@ class RentedFragment : Fragment(), CardOption {
             })
 
         return getCardsById(rentedCards)
-    }
+    }*/
 
     override fun editCard(cardInfo: CardInfo) {
 
