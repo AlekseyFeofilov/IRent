@@ -22,6 +22,6 @@ interface AuthorizationApi {
     @PATCH("/login")
     fun confirmUser(@Body confirmData: ConfirmData): Call<User>
 
-    @DELETE("/me/settings")
+    @HTTP(method = "DELETE", path = "/me/settings", hasBody = true)
     fun deleteAccount(@Body securityExtendData: SecurityExtendData): Call<Boolean>
 }
