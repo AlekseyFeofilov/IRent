@@ -26,14 +26,18 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        binding.deleteAccountButton.setOnClickListener(deleteAccount)
         return binding.root
     }
 
-    private val deleteAccount = View.OnClickListener {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.deleteAccountButton.setOnClickListener { deleteAccount() }
+    }
+
+    private fun deleteAccount() {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.logOutFragment, LogOutFragment())
+            .replace(R.id.navFragment, LogOutFragment())
             .commit()
     }
 }
